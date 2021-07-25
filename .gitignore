@@ -1,0 +1,15 @@
+.vs 
+.vscode 
+
+*/.vs 
+*/.vscode 
+
+*/bin 
+*/obj
+
+*/*/bin 
+*/*/obj
+
+Core
+
+Docs/ProcessDocs 
