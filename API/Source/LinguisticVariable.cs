@@ -12,6 +12,15 @@ namespace FuzzyModules.Api
 
         public LinguisticVariable(double start, double end, double step)
         {
+            if (start >= end)
+            {
+                throw new System.Exception("Error while initializing LinguisticVariable: start point should be greater than end point"); 
+            }
+            if (step <= 0)
+            {
+                throw new System.Exception("Error while initializing LinguisticVariable: step should be greater than 0"); 
+            }
+
             StartPoint = start; 
             EndPoint = end; 
             Step = step; 

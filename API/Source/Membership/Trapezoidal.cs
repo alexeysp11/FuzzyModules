@@ -13,13 +13,21 @@ namespace FuzzyModules.Api.Membership
 
         public Trapezoidal(LinguisticVariable lingVar, double[] nodes)
         {
+            if (lingVar == null)
+            {
+                throw new System.Exception("Error while initializing Trapezoidal: LinguisticVariable should not be null"); 
+            }
             if (nodes.Length != 4)
             {
-                throw new System.Exception("Number of nodes should be equal to 4 for trapezoidal membership function"); 
+                throw new System.Exception("Error while initializing Trapezoidal: number of nodes should be equal to 4 for trapezoidal membership function"); 
             }
             if (nodes[0] > nodes[1] || nodes[1] > nodes[2] || nodes[2] > nodes[3])
             {
-                throw new System.Exception("Error while linguistic variable initialization: next element cannot be less than previous one"); 
+                throw new System.Exception("Error while initializing Trapezoidal: next element cannot be less than previous one"); 
+            }
+            else if (nodes[0] == nodes[2] || nodes[1] == nodes[3])
+            {
+                throw new System.Exception($"Error while initializing Trapezoidal: nodes ({nodes[0]} and {nodes[2]} or {nodes[1]} and {nodes[3]}) should not be the same"); 
             }
 
             LingVar = lingVar; 
@@ -38,11 +46,7 @@ namespace FuzzyModules.Api.Membership
             }
 
             double output = 0; 
-            if (input <= SupportStart || input >= SupportEnd)
-            {
-                output = 0; 
-            }
-            else if (input >= CoreStart && input <= CoreEnd)
+            if (input >= CoreStart && input <= CoreEnd)
             {
                 output = 1; 
             }

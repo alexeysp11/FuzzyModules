@@ -12,9 +12,21 @@ namespace FuzzyModules.Api.Membership
 
         public Triangular(LinguisticVariable lingVar, double[] nodes)
         {
+            if (lingVar == null)
+            {
+                throw new System.Exception("Error while initializing Triangular: LinguisticVariable should not be null"); 
+            }
             if (nodes.Length != 3)
             {
-                throw new System.Exception("Number of nodes should be equal to 3 for triangular membership function"); 
+                throw new System.Exception("Error while initializing Triangular: number of nodes should be equal to 3 for triangular membership function"); 
+            }
+            if (nodes[0] > nodes[1] || nodes[1] > nodes[2])
+            {
+                throw new System.Exception("Error while initializing Triangular: incorrect order of nodes"); 
+            }
+            else if (nodes[0] == nodes[2])
+            {
+                throw new System.Exception($"Error while initializing Triangular: nodes ({nodes[0]} and {nodes[2]}) should not be the same"); 
             }
 
             LingVar = lingVar; 
@@ -32,11 +44,7 @@ namespace FuzzyModules.Api.Membership
             }
 
             double output = 0; 
-            if (input <= StartVertex || input >= EndVertex)
-            {
-                output = 0; 
-            }
-            else if (input == UpperVertex)
+            if (input == UpperVertex)
             {
                 output = 1; 
             }

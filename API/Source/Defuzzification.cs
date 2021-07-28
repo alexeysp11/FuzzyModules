@@ -8,6 +8,13 @@ namespace FuzzyModules.Api
 
         public Defuzzification(double[] mfDegree)
         {
+            for (int i = 0; i < mfDegree.Length; i++)
+            {
+                if (mfDegree[i] > 1 || mfDegree[i] < 0)
+                {
+                    throw new System.Exception($"Error while defuzzification: all values of the membership function should range from 0 to 1 ({i}-th element is equal to {mfDegree[i]})"); 
+                }
+            }
             MfDegree = mfDegree; 
         }
 
@@ -35,22 +42,22 @@ namespace FuzzyModules.Api
 
         public double FirstOfMaximum()
         {
-            return 0; 
+            throw new System.NotImplementedException(); 
         }
 
         public double LastOfMaximum()
         {
-            return 0; 
+            throw new System.NotImplementedException(); 
         }
 
         public double Centroid()
         {
-            return 0; 
+            throw new System.NotImplementedException();
         }
 
         public double Bisector()
         {
-            return 0; 
+            throw new System.NotImplementedException();
         }
 
         private double FindMaxValue()
